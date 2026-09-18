@@ -1,180 +1,48 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard</title>
-
-https://cdn.jsdelivr.net/npm/chart.jsscript>
-
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026 Bütçe Dashboard</title>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Segoe UI, sans-serif;
-}
-
-body{
-    display:flex;
-    min-height:100vh;
-    background:#f4f6f9;
-}
-
-.sidebar{
-    width:250px;
-    background:#1e293b;
-    color:white;
-    padding:20px;
-}
-
-.sidebar h2{
-    margin-bottom:30px;
-    text-align:center;
-}
-
-.sidebar ul{
-    list-style:none;
-}
-
-.sidebar ul li{
-    padding:12px;
-    margin-bottom:10px;
-    border-radius:8px;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.sidebar ul li:hover{
-    background:#334155;
-}
-
-.main{
-    flex:1;
-    padding:25px;
-}
-
-.header{
-    margin-bottom:25px;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-}
-
-.card{
-    background:white;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
-}
-
-.card h3{
-    color:#666;
-    font-size:16px;
-}
-
-.card .value{
-    font-size:32px;
-    font-weight:bold;
-    color:#2563eb;
-    margin-top:10px;
-}
-
-.chart-box{
-    margin-top:30px;
-    background:white;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
-}
-</style>
-</head>
-<body>
-
-<div class="sidebar">
-    <h2>📊 Dashboard</h2>
-
-    <ul>
-        <li>🏠 Ana Sayfa</li>
-        <li>📈 Raporlar</li>
-        <li>🛒 Satışlar</li>
-        <li>👥 Kullanıcılar</li>
-        <li>⚙️ Ayarlar</li>
-    </ul>
-</div>
-
-<div class="main">
-
-    <div class="header">
-        <h1>Yönetim Paneli</h1>
-        <p>Şirket performans özeti</p>
-    </div>
-
-    <div class="cards">
-
-        <div class="card">
-            <h3>Toplam Satış</h3>
-            <div class="value">₺245.000</div>
-        </div>
-
-        <div class="card">
-            <h3>Müşteri</h3>
-            <div class="value">1.280</div>
-        </div>
-
-        <div class="card">
-            <h3>Sipariş</h3>
-            <div class="value">3.452</div>
-        </div>
-
-        <div class="card">
-            <h3>Gelir</h3>
-            <div class="value">₺82.500</div>
-        </div>
-
-    </div>
-
-    <div class="chart-box">
-        <h2>Aylık Satışlar</h2>
-        <br>
-        <canvas id="salesChart"></canvas>
-    </div>
-
-</div>
-
-<script>
-const ctx = document.getElementById('salesChart');
-
-new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran'],
-        datasets: [{
-            label: 'Satış Tutarı',
-            data: [12000,19000,15000,25000,22000,30000],
-            backgroundColor: [
-                '#2563eb',
-                '#3b82f6',
-                '#60a5fa',
-                '#93c5fd',
-                '#2563eb',
-                '#1d4ed8'
-            ]
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                display: true
-            }
-        }
-    }
-});
-</script>
-
-</body>
-</html>
+:root{--nav:#14213d;--blue:#2563eb;--bg:#f3f6fb;--card:#fff;--text:#172033;--muted:#667085}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Segoe UI,Arial,sans-serif;color:var(--text)}
+header{background:var(--nav);color:#fff;padding:22px 5vw;display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}header h1{margin:0;font-size:clamp(22px,4vw,34px)}
+main{max-width:1400px;margin:auto;padding:24px}.toolbar,.card,.panel{background:#fff;border-radius:16px;box-shadow:0 5px 18px #16213e12}.toolbar{padding:16px;margin-bottom:18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+button,.file{border:0;border-radius:10px;padding:11px 15px;background:var(--blue);color:#fff;font-weight:600;cursor:pointer}.file input{display:none}.status{color:var(--muted);font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{padding:20px}.card small{color:var(--muted)}.card strong{display:block;font-size:clamp(20px,3vw,29px);margin-top:9px}
+.grid{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-top:16px}.panel{padding:18px;min-width:0}.panel h2{font-size:18px;margin:0 0 14px}.wide{grid-column:1/-1}
+.tablewrap{overflow:auto;max-height:440px}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:10px;border-bottom:1px solid #e7eaf0;text-align:left;white-space:nowrap}th{position:sticky;top:0;background:#eef3ff}td.num{text-align:right}
+.notice{padding:12px;border-radius:10px;background:#fff5db;color:#704d00;font-size:14px}.analysis{line-height:1.7}.analysis li{margin:5px 0}
+@media(max-width:850px){.cards{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.wide{grid-column:auto}}@media(max-width:480px){main{padding:12px}.cards{grid-template-columns:1fr}}
+</style></head><body>
+<header><div><h1>Aylık Bütçe Gerçekleşmeleri</h1><div>2026 · Otomatik Excel analizi</div></div><div id="updated">Veri bekleniyor</div></header>
+<main>
+<div class="toolbar"><button id="reload">OneDrive'dan Yenile</button><label class="file">Excel Seç<input id="file" type="file" accept=".xls,.xlsx"></label><span class="status" id="status">OneDrive bağlantısı deneniyor...</span></div>
+<div id="warning" class="notice" hidden></div>
+<section class="cards"><div class="card"><small>Toplam bütçe</small><strong id="budget">-</strong></div><div class="card"><small>Gerçekleşen</small><strong id="spent">-</strong></div><div class="card"><small>Kalan</small><strong id="remaining">-</strong></div><div class="card"><small>Kullanım oranı</small><strong id="rate">-</strong></div></section>
+<section class="grid"><div class="panel"><h2>Aylık gerçekleşme</h2><canvas id="monthChart"></canvas></div><div class="panel"><h2>Gider grupları</h2><canvas id="groupChart"></canvas></div><div class="panel wide"><h2>Otomatik analiz</h2><ul id="analysis" class="analysis"></ul></div><div class="panel wide"><h2>En yüksek 25 bütçe kalemi</h2><div class="tablewrap"><table><thead><tr><th>Grup</th><th>Hesap</th><th>Bütçe</th><th>Gerçekleşen</th><th>Kalan</th><th>Oran</th></tr></thead><tbody id="rows"></tbody></table></div></div></section>
+</main><script>
+const SHARE_URL='https://1drv.ms/x/c/f82bf01f90d2042f/IQARO-PhhTPtSq8s5voHt15GAfKeHqODrmA47GXJPD6avCI?e=xKLIec';
+const MONTHS=['OCAK','ŞUBAT','MART','NİSAN','MAYIS','HAZİRAN','TEMMUZ','AĞUSTOS','EYLÜL','EKİM','KASIM','ARALIK'];
+let charts=[]; const fmt=n=>new Intl.NumberFormat('tr-TR',{style:'currency',currency:'TRY',maximumFractionDigits:0}).format(n||0);
+const num=v=>{if(typeof v==='number')return isFinite(v)?v:0;let s=String(v??'').trim().replace(/\s/g,'');if(!s)return 0;if(s.includes(',')&&!s.includes('.'))s=s.replace(',','.');else if(s.includes(',')&&s.includes('.'))s=s.replace(/\./g,'').replace(',','.');return Number(s)||0};
+function parse(buffer){const wb=XLSX.read(buffer,{type:'array'}),ws=wb.Sheets[wb.SheetNames[0]],a=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
+ const hi=a.findIndex(r=>r.some(c=>String(c).trim().toLocaleUpperCase('tr-TR')==='GİDER BÜTÇE'));
+ if(hi<0)throw Error('Gider Bütçe başlığı bulunamadı.'); const heads=a[hi].map(x=>String(x).trim());
+ return a.slice(hi+1).filter(r=>r.some(x=>x!==''&&x!=null)).map(r=>Object.fromEntries(heads.map((h,i)=>[h,r[i]]))).filter(r=>r['Hesap Adı']);}
+function render(data){charts.forEach(c=>c.destroy());charts=[];const month=MONTHS.map(m=>data.reduce((s,r)=>s+num(r[m]),0));
+ const budget=data.reduce((s,r)=>s+num(r['Gider Bütçe']),0),spent=month.reduce((a,b)=>a+b,0),remaining=data.reduce((s,r)=>s+num(r['Kalan']),0),rate=budget?spent/budget*100:0;
+ budgetEl.textContent=fmt(budget);spentEl.textContent=fmt(spent);remainingEl.textContent=fmt(remaining);rateEl.textContent=rate.toLocaleString('tr-TR',{maximumFractionDigits:1})+'%';
+ const groups={};data.forEach(r=>groups[r['Grup Adı']||'Diğer']=(groups[r['Grup Adı']||'Diğer']||0)+MONTHS.reduce((s,m)=>s+num(r[m]),0));
+ charts.push(new Chart(document.getElementById('monthChart'),{type:'bar',data:{labels:MONTHS,datasets:[{label:'Gerçekleşme',data:month,backgroundColor:'#2563eb'}]},options:{responsive:true,plugins:{legend:{display:false}}}}));
+ const gs=Object.entries(groups).sort((a,b)=>b[1]-a[1]);charts.push(new Chart(document.getElementById('groupChart'),{type:'doughnut',data:{labels:gs.map(x=>x[0]),datasets:[{data:gs.map(x=>x[1])}]},options:{responsive:true}}));
+ const top=data.map(r=>({...r,_spent:MONTHS.reduce((s,m)=>s+num(r[m]),0)})).sort((a,b)=>num(b['Gider Bütçe'])-num(a['Gider Bütçe'])).slice(0,25);
+ document.getElementById('rows').innerHTML=top.map(r=>`<tr><td>${esc(r['Grup Adı'])}</td><td>${esc(r['Hesap Adı'])}</td><td class=num>${fmt(num(r['Gider Bütçe']))}</td><td class=num>${fmt(r._spent)}</td><td class=num>${fmt(num(r['Kalan']))}</td><td class=num>${num(r['Gider Bütçe'])?(r._spent/num(r['Gider Bütçe'])*100).toFixed(1):0}%</td></tr>`).join('');
+ const maxM=month.indexOf(Math.max(...month)),topG=gs[0]||['-',0],over=data.filter(r=>num(r['Gider Bütçe'])>0&&MONTHS.reduce((s,m)=>s+num(r[m]),0)>num(r['Gider Bütçe']));
+ document.getElementById('analysis').innerHTML=`<li>Bütçenin <b>%${rate.toLocaleString('tr-TR',{maximumFractionDigits:1})}</b> kadarı gerçekleşmiş görünüyor.</li><li>En yüksek aylık gerçekleşme <b>${MONTHS[maxM]}</b> ayında: <b>${fmt(month[maxM])}</b>.</li><li>En yüksek gerçekleşmeye sahip gider grubu <b>${esc(topG[0])}</b>: <b>${fmt(topG[1])}</b>.</li><li>Bütçesini aşmış görünen kalem sayısı: <b>${over.length}</b>.</li>`;
+ document.getElementById('updated').textContent='Son yenileme: '+new Date().toLocaleString('tr-TR');document.getElementById('status').textContent=data.length+' bütçe kalemi okundu.';}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+async function loadRemote(){statusEl.textContent='OneDrive verisi alınıyor...';warning.hidden=true;try{const u=SHARE_URL+(SHARE_URL.includes('?')?'&':'?')+'download=1&t='+Date.now();const r=await fetch(u,{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);render(parse(await r.arrayBuffer()));}catch(e){warning.hidden=false;warning.textContent='OneDrive otomatik okuma tarayıcı tarafından engellendi. Excel Seç düğmesiyle M2.xls dosyasını açabilirsin. Tam otomasyon için Microsoft Graph oturumu veya küçük bir sunucu gerekir.';statusEl.textContent='Otomatik bağlantı kurulamadı.';}}
+const budgetEl=document.getElementById('budget'),spentEl=document.getElementById('spent'),remainingEl=document.getElementById('remaining'),rateEl=document.getElementById('rate'),statusEl=document.getElementById('status'),warning=document.getElementById('warning');
+document.getElementById('reload').onclick=loadRemote;document.getElementById('file').onchange=async e=>{if(e.target.files[0])render(parse(await e.target.files[0].arrayBuffer()))};loadRemote();setInterval(loadRemote,300000);
+</script></body></html>
